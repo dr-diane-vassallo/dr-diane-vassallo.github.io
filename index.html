@@ -1067,6 +1067,152 @@
 
     #back-top:hover { background: var(--accent-dark); }
 
+    /* ── Conferences timeline ─────────────────────────────────── */
+    .conf-timeline { display: flex; flex-direction: column; gap: 0; }
+
+    .conf-entry {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 0 1.4rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .conf-entry:last-child { border-bottom: none; }
+
+    .conf-year-col { padding-top: 0.15rem; }
+
+    .conf-year-badge {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border-radius: 4px;
+      padding: 0.18rem 0.45rem;
+      white-space: nowrap;
+    }
+
+    .conf-month {
+      display: block;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .conf-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+
+    .conf-location {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .conf-paper {
+      font-size: 0.88rem;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+      line-height: 1.4;
+    }
+
+    .conf-authors {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .conf-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+    .conf-tag {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      background: var(--bg-alt);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .conf-tag.peer { background: #ECFDF5; color: #059669; border-color: #A7F3D0; }
+    .conf-tag.wos  { background: #EFF6FF; color: #2563EB; border-color: #BFDBFE; }
+    .conf-tag.proj { background: var(--accent-light); color: var(--accent); border-color: #C7D9ED; }
+
+    .conf-toggle-wrap { margin-top: 1.5rem; }
+
+    .conf-toggle-wrap summary {
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 0;
+      border-top: 1px solid var(--border);
+      user-select: none;
+    }
+    .conf-toggle-wrap summary::-webkit-details-marker { display: none; }
+    .conf-toggle-wrap summary::before { content: '▶'; font-size: 0.6rem; transition: transform 0.2s; }
+    .conf-toggle-wrap[open] summary::before { transform: rotate(90deg); }
+
+    /* ── Theses cards ──────────────────────────────────────────── */
+    .thesis-grid { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+
+    .thesis-card {
+      background: var(--bg-alt);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.2rem 1.4rem;
+    }
+
+    .thesis-type {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .thesis-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+
+    .thesis-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .thesis-note {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    @media (max-width: 480px) {
+      .conf-entry { grid-template-columns: 1fr; gap: 0.3rem; }
+      .conf-year-col { display: flex; align-items: center; gap: 0.5rem; }
+      .conf-month { margin-top: 0; }
+    }
+
     /* ── Lightbox ─────────────────────────────────────────────── */
     .lightbox-overlay {
       display: none;
@@ -1143,6 +1289,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#publications">Publications</a></li>
+        <li><a href="#conferences">Conferences</a></li>
         <li><a href="#teaching">Teaching</a></li>
         <li><a href="#news">News</a></li>
         <li><a href="#service">Service</a></li>
@@ -1746,8 +1893,53 @@
 
       </div>
 
+      <!-- Theses & Dissertations -->
+      <div style="margin-top:3.5rem;">
+        <div class="section-title" style="margin-bottom:1rem;">
+          <span class="section-label">Academic Foundations</span>
+          <h3 style="font-size:1.2rem; font-weight:700; color:var(--text);">Theses &amp; Dissertations</h3>
+          <div class="divider"></div>
+        </div>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1.2rem;">
+          Foundational academic works underpinning my research trajectory.
+        </p>
+        <div class="thesis-grid">
+
+          <div class="thesis-card">
+            <p class="thesis-type">Doctoral Thesis · 2013</p>
+            <p class="thesis-title">Mainstream technologically-enhanced learning environments in special schools in Northern Ireland</p>
+            <p class="thesis-meta">
+              Buhagiar, D. (2013). Doctoral dissertation, Queen's University Belfast, Belfast, UK.<br>
+              <span class="thesis-note">Published under previous name.</span>
+            </p>
+            <p style="margin-top:0.6rem;">
+              <a href="https://scholar.google.com/scholar?q=Mainstream+technologically-enhanced+learning+environments+in+special+schools+in+Northern+Ireland" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem;">View on Google Scholar ↗</a>
+            </p>
+          </div>
+
+          <div class="thesis-card">
+            <p class="thesis-type">MSc Dissertation · 2004</p>
+            <p class="thesis-title">Designing online instruction: Incorporating the elements of meaningful learning in the design of an e-learning course</p>
+            <p class="thesis-meta">
+              Vassallo, D. (2004). MSc dissertation, Lancaster University, Lancaster, UK.<br>
+              <em>MSc in Advanced Learning Technology.</em>
+            </p>
+          </div>
+
+          <div class="thesis-card">
+            <p class="thesis-type">B.Ed. Honours Dissertation · 2001</p>
+            <p class="thesis-title">English language verbs: Software and teaching pack</p>
+            <p class="thesis-meta">
+              Cefai, D., &amp; Vassallo, D. (2001). B.Ed. Honours dissertation, University of Malta, Malta.<br>
+              A multimedia software package designed to support secondary school students in Forms I and II in learning English verb concepts, evaluated with 40 students across four schools.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
       <!-- Bottom buttons -->
-      <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:0.5rem;">
+      <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:2rem;">
         <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
           View all publications on Google Scholar ↗
         </a>
@@ -1755,6 +1947,201 @@
           View full list on OAR@UM ↗
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- ── Conferences ────────────────────────────────────────── -->
+  <section id="conferences">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Scholarly Presentations</span>
+        <h2>Conferences</h2>
+        <div class="divider"></div>
+      </div>
+
+      <!-- Section A: Invited Talks -->
+      <div style="margin-bottom:3rem;">
+        <h3 style="font-size:1rem; margin-bottom:0.6rem;">A — Invited Talks &amp; Panel Contributions</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.8rem;">
+          Invited appearances as a panelist and expert contributor at public and policy events.
+          See full details on the <a href="#policy">Policy Engagement</a> page.
+        </p>
+        <div style="background:var(--bg-alt); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.2rem; font-size:0.85rem; color:var(--text-muted);">
+          <p style="margin-bottom:0.4rem;"><strong style="color:var(--text);">AI in Education — Public Panel Discussion</strong> · Malta</p>
+          <p style="margin-bottom:0.8rem;">Invited panelist on AI literacy, computational thinking, and ethical technology integration in schools.</p>
+          <p><strong style="color:var(--text);">Digital Education Strategy 2030 — Consultation &amp; Working Group</strong> · DDLTS, Government of Malta</p>
+          <p>Invited expert contributor to Malta's national Digital Education Strategy 2030 consultation and working group panels.</p>
+        </div>
+        <p style="margin-top:0.6rem; font-size:0.78rem; color:var(--text-muted);">
+          → <a href="#policy">See Policy Engagement &amp; Public Contribution</a> for full details.
+        </p>
+      </div>
+
+      <!-- Section B: Conference Paper Presentations -->
+      <h3 style="font-size:1rem; margin-bottom:1.2rem;">B — Conference Paper Presentations</h3>
+
+      <div class="conf-timeline">
+
+        <!-- March 2026 -->
+        <div class="conf-entry">
+          <div class="conf-year-col">
+            <span class="conf-year-badge">2026</span>
+            <span class="conf-month">March</span>
+          </div>
+          <div>
+            <p class="conf-name">NERA 2026 — Nordic Educational Research Association Conference</p>
+            <p class="conf-location">VIA University College, Aarhus, Denmark</p>
+            <p class="conf-paper">"Teacher educators' emotions toward generative AI: Cross-national focus groups"</p>
+            <p class="conf-authors">With: Juuti, K., Turkkila, M., Usenik, J., &amp; Stupurienė, G.</p>
+            <div class="conf-tags">
+              <span class="conf-tag peer">Peer-reviewed</span>
+              <span class="conf-tag proj">EmpowerAId project</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- August 2025 -->
+        <div class="conf-entry">
+          <div class="conf-year-col">
+            <span class="conf-year-badge">2025</span>
+            <span class="conf-month">August</span>
+          </div>
+          <div>
+            <p class="conf-name">ICETOL 2025 — 5th International Conference on Educational Technology and Online Learning</p>
+            <p class="conf-location">Cunda, Ayvalık, Turkey</p>
+            <p class="conf-paper">"Yapay zeka yeterliği, bilişimsel düşünme ve sanal risk algısı arasındaki ilişkide dijital iyi oluşun aracı ve düzenleyici rolü"</p>
+            <p style="font-size:0.82rem; color:var(--text-muted); font-style:normal; margin-bottom:0.2rem;">[The mediating and moderating role of digital well-being in the relationship between AI competence, computational thinking, and virtual risk perception]</p>
+            <p class="conf-authors">With: Arslankara, V.B., Owusu Ansah, L., Thériault, C., &amp; Pivetta da Silva, M.</p>
+            <div class="conf-tags">
+              <span class="conf-tag peer">Peer-reviewed</span>
+              <span class="conf-tag proj">Cross-national: Turkey · Malta · Ghana · Canada · Brazil</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- November 2023 -->
+        <div class="conf-entry">
+          <div class="conf-year-col">
+            <span class="conf-year-badge">2023</span>
+            <span class="conf-month">November</span>
+          </div>
+          <div>
+            <p class="conf-name">ICERI 2023 — 16th International Conference of Education, Research and Innovation</p>
+            <p class="conf-location">Seville, Spain</p>
+            <p class="conf-paper">"Embarking on computational thinking"</p>
+            <div class="conf-tags">
+              <span class="conf-tag peer">Peer-reviewed</span>
+              <span class="conf-tag wos">Web of Science</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- October 2022 -->
+        <div class="conf-entry">
+          <div class="conf-year-col">
+            <span class="conf-year-badge">2022</span>
+            <span class="conf-month">October</span>
+          </div>
+          <div>
+            <p class="conf-name">ATEE 2022 — Association for Teacher Education in Europe Annual Conference</p>
+            <p class="conf-location">Morschach, Switzerland</p>
+            <p class="conf-paper">"Integrating computational thinking into classroom practice: A case study"</p>
+            <div class="conf-tags">
+              <span class="conf-tag peer">Peer-reviewed</span>
+              <span class="conf-tag wos">Web of Science</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collapsible: 2008–2011 -->
+        <details class="conf-toggle-wrap">
+          <summary>Earlier Presentations (2008–2011)</summary>
+          <div class="conf-timeline" style="margin-top:0.5rem;">
+
+            <!-- September 2011 -->
+            <div class="conf-entry">
+              <div class="conf-year-col">
+                <span class="conf-year-badge">2011</span>
+                <span class="conf-month">September</span>
+              </div>
+              <div>
+                <p class="conf-name">BERA Annual Conference 2011</p>
+                <p class="conf-location">London, United Kingdom</p>
+                <p class="conf-paper">"ICT integration and Northern Ireland's special education: A survey study"</p>
+                <p class="conf-paper">"Giving students with learning difficulties a 'voice'"</p>
+              </div>
+            </div>
+
+            <!-- September 2009 ECER -->
+            <div class="conf-entry">
+              <div class="conf-year-col">
+                <span class="conf-year-badge">2009</span>
+                <span class="conf-month">September</span>
+              </div>
+              <div>
+                <p class="conf-name">ECER 2009 — European Conference on Educational Research</p>
+                <p class="conf-location">Vienna, Austria</p>
+                <p class="conf-paper">"Using Activity Theory to reveal the barriers to technology-enhanced learning in special school classrooms"</p>
+                <p class="conf-paper">"ICT integration and Northern Ireland's special education: A survey study"</p>
+              </div>
+            </div>
+
+            <!-- September 2009 BERA -->
+            <div class="conf-entry">
+              <div class="conf-year-col">
+                <span class="conf-year-badge">2009</span>
+                <span class="conf-month">September</span>
+              </div>
+              <div>
+                <p class="conf-name">BERA Annual Conference 2009</p>
+                <p class="conf-location">Manchester, United Kingdom</p>
+                <p class="conf-paper">"Exploring the effects of a technologically-enhanced learning environment in a classroom for students with learning difficulties: An activity theory approach"</p>
+              </div>
+            </div>
+
+            <!-- September 2008 ECER -->
+            <div class="conf-entry">
+              <div class="conf-year-col">
+                <span class="conf-year-badge">2008</span>
+                <span class="conf-month">September</span>
+              </div>
+              <div>
+                <p class="conf-name">ECER 2008 — European Conference on Educational Research</p>
+                <p class="conf-location">Göteborg, Sweden</p>
+                <p class="conf-paper">"Digital portfolios and online voting systems: Best practices in assessment for learning and the promotion of self-monitoring skills"</p>
+              </div>
+            </div>
+
+            <!-- September 2008 BERA -->
+            <div class="conf-entry">
+              <div class="conf-year-col">
+                <span class="conf-year-badge">2008</span>
+                <span class="conf-month">September</span>
+              </div>
+              <div>
+                <p class="conf-name">BERA Annual Conference 2008</p>
+                <p class="conf-location">Edinburgh, United Kingdom</p>
+                <p class="conf-paper">"Digital portfolios and online voting systems: Best practices in assessment for learning and the promotion of self-monitoring skills"</p>
+              </div>
+            </div>
+
+            <!-- June 2008 ED-MEDIA -->
+            <div class="conf-entry">
+              <div class="conf-year-col">
+                <span class="conf-year-badge">2008</span>
+                <span class="conf-month">June</span>
+              </div>
+              <div>
+                <p class="conf-name">ED-MEDIA 2008 — World Conference on Educational Multimedia, Hypermedia &amp; Telecommunications</p>
+                <p class="conf-location">Vienna, Austria</p>
+                <p class="conf-paper">"Digital portfolios and online voting systems: Best practices in assessment for learning and the promotion of self-monitoring skills"</p>
+              </div>
+            </div>
+
+          </div>
+        </details>
+
+      </div><!-- /conf-timeline -->
     </div>
   </section>
 
