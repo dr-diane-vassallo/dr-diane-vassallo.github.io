@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Diane Vassallo — Lecturer &amp; Researcher, University of Malta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:       #5B7FA6;   /* slate blue */
+      --accent-light: #EBF0F7;
+      --accent-dark:  #3D5A7A;
+      --text:         #1A1A2E;
+      --text-muted:   #6B7280;
+      --border:       #E5E7EB;
+      --bg:           #FFFFFF;
+      --bg-alt:       #F9FAFB;
+      --nav-h:        64px;
+      --max-w:        860px;
+      --radius:       10px;
+      --transition:   0.2s ease;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Typography ───────────────────────────────────────────── */
+    h1, h2, h3 { line-height: 1.25; font-weight: 700; }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    h2 { font-size: clamp(1.3rem, 3vw, 1.75rem); }
+    h3 { font-size: 1.05rem; font-weight: 600; }
+
+    p { color: var(--text-muted); }
+    a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--accent-dark); }
+
+    /* ── Layout helpers ───────────────────────────────────────── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    section:nth-child(even) {
+      background: var(--bg-alt);
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title h2 {
+      color: var(--text);
+    }
+
+    .divider {
+      width: 36px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-top: 0.6rem;
+    }
+
+    /* ── Navigation ───────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-h);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: box-shadow var(--transition);
+    }
+
+    nav.scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 0.4rem 0.65rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: 6px;
+      transition: color var(--transition), background var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav */
+    @media (max-width: 720px) {
+      .nav-toggle { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.2rem;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 0.9rem; padding: 0.6rem 1rem; }
+    }
+
+    /* ── Buttons ──────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 7px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 1.5px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    /* ── Hero / About ─────────────────────────────────────────── */
+    #about {
+      padding-top: calc(var(--nav-h) + 70px);
+      padding-bottom: 90px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .photo-wrap { margin: 0 auto; }
+      .about-actions { justify-content: center; }
+    }
+
+    .photo-wrap {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent-light);
+      box-shadow: 0 0 0 5px var(--accent-light);
+      flex-shrink: 0;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--accent-light) 0%, #d5e2f0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      color: var(--accent);
+      user-select: none;
+    }
+
+    .about-content .title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: 0.3rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .about-content .bio {
+      font-size: 0.97rem;
+      line-height: 1.8;
+      margin-bottom: 1.6rem;
+      max-width: 620px;
+    }
+
+    .about-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    /* ── Research Projects ────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.4rem;
+    }
+
+    @media (max-width: 480px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 28px rgba(91,127,166,0.12);
+      transform: translateY(-2px);
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .card h3 a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .card h3 a:hover { color: var(--accent); }
+
+    .card p {
+      font-size: 0.88rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .card-meta strong { color: var(--text); font-weight: 500; }
+
+    /* ── Project sub-sections ────────────────────────────────── */
+    .projects-subsection { margin-bottom: 3.5rem; }
+    .projects-subsection:last-child { margin-bottom: 0; }
+
+    .subsection-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.6rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .subsection-header h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .subsection-header p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    .eu-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      background: #003399;
+      color: #FFCC00;
+      border-radius: 5px;
+      padding: 0.22rem 0.55rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .eu-badge::before {
+      content: '★';
+      font-size: 0.65rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Horizontal scroll photo gallery ─────────────────────── */
+    .pg {                          /* gallery wrapper */
+      position: relative;
+      margin: 1.1rem -1.6rem 1rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pg-track {                    /* scrollable row */
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 14px 16px;
+      scrollbar-width: none;
+    }
+
+    .pg-track::-webkit-scrollbar { display: none; }
+
+    .pg-item {                     /* one photo + caption */
+      flex: 0 0 44%;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 600px) {
+      .pg-item { flex: 0 0 82%; }
+    }
+
+    .pg-item img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .pg-item figcaption {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: #9CA3AF;
+      text-align: center;
+      margin-top: 0.35rem;
+      line-height: 1.3;
+      padding: 0 0.2rem;
+    }
+
+    /* Single-photo variant — centred, max 500px */
+    .pg.pg-single .pg-track {
+      justify-content: center;
+    }
+
+    .pg.pg-single .pg-item {
+      flex: 0 0 min(100%, 500px);
+    }
+
+    /* Scroll arrow buttons */
+    .pg-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-calc(50% + 0.6rem)); /* account for caption */
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+
+    .pg-btn:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .pg-btn.pg-prev { left: 2px; }
+    .pg-btn.pg-next { right: 2px; }
+
+    /* Photo placeholder for cards without images */
+    .pg-placeholder {
+      margin: 1.1rem -1.6rem 1rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.8rem 1rem;
+      background: linear-gradient(135deg, rgba(91,127,166,0.04), rgba(91,127,166,0.08));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .pg-placeholder-acronym {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #D1D5DB;
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    .pg-placeholder-caption {
+      font-size: 0.72rem;
+      color: #9CA3AF;
+      font-style: italic;
+    }
+
+    /* Website coming-soon button */
+    .btn-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 1rem;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #9CA3AF;
+      border: 1.5px solid #E5E7EB;
+      background: #F9FAFB;
+      cursor: default;
+      text-decoration: none;
+    }
+
+    /* Course code links in Teaching */
+    .course-link {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.3rem;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .course-link:hover { color: var(--accent); }
+    .course-link:hover .course-code { text-decoration: underline; }
+
+    .course-code {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── Policy Engagement section ────────────────────────────── */
+    :root { --policy: #6A5D9B; --policy-light: #F0EDF8; }
+
+    .policy-entry {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 1.8rem;
+      align-items: start;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--policy);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.7rem;
+      margin-bottom: 1.4rem;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .policy-entry:last-child { margin-bottom: 0; }
+
+    .policy-entry:hover {
+      box-shadow: 0 6px 24px rgba(106,93,155,0.1);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 680px) {
+      .policy-entry { grid-template-columns: 1fr; }
+    }
+
+    .policy-org {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--policy);
+      margin-bottom: 0.35rem;
+    }
+
+    .policy-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 0.7rem;
+    }
+
+    .policy-desc {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .policy-photo {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .policy-photo img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 8px;
+      transition: transform 0.35s ease;
+    }
+
+    .policy-photo:hover img { transform: scale(1.03); }
+
+    .policy-photo figcaption {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: #9CA3AF;
+      margin-top: 0.4rem;
+      line-height: 1.3;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 20px;
+    }
+
+    .status-active {
+      background: #ECFDF5;
+      color: #059669;
+    }
+
+    .status-active::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #059669;
+    }
+
+    .status-completed {
+      background: #F3F4F6;
+      color: #6B7280;
+    }
+
+    .status-completed::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #9CA3AF;
+    }
+
+    /* ── Publications ─────────────────────────────────────────── */
+    .pub-year-group { margin-bottom: 2.8rem; }
+
+    .pub-year {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .pub-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--bg-alt);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-start: start;
+    }
+
+    .pub-item:last-child { border-bottom: none; }
+
+    .pub-title {
+      font-size: 0.93rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+      line-height: 1.4;
+    }
+
+    .pub-authors {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .pub-venue {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .pub-doi {
+      font-size: 0.78rem;
+      font-weight: 500;
+      white-space: nowrap;
+      align-self: flex-start;
+      margin-top: 0.15rem;
+    }
+
+    /* Linked pub titles */
+    .pub-title a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .pub-title a:hover { color: var(--accent); text-decoration: underline; }
+    .pub-ext { font-size: 0.68em; color: var(--accent); margin-left: 0.2rem; vertical-align: super; }
+
+    /* Recent publications homepage block */
+    .rpub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .rpub-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.2rem;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .rpub-card:hover {
+      box-shadow: 0 6px 20px rgba(91,127,166,0.1);
+      transform: translateY(-2px);
+      color: inherit;
+    }
+
+    .rpub-year {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 0.12rem 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .rpub-title {
+      font-size: 0.87rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 0.35rem;
+    }
+
+    .rpub-journal { font-size: 0.76rem; color: var(--text-muted); font-style: italic; }
+
+    /* Related publications on project cards */
+    .related-pubs {
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.85rem;
+    }
+
+    .related-pubs-label {
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .related-pubs ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .related-pubs li {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      padding-left: 0.9rem;
+      position: relative;
+      line-height: 1.45;
+    }
+
+    .related-pubs li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+    .related-pubs a { color: var(--text-muted); text-decoration: none; }
+    .related-pubs a:hover { color: var(--accent); text-decoration: underline; }
+
+    /* ── Teaching ─────────────────────────────────────────────── */
+    .teaching-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .teaching-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.3rem 1.4rem;
+      transition: box-shadow var(--transition);
+    }
+
+    .teaching-card:hover {
+      box-shadow: 0 4px 16px rgba(91,127,166,0.1);
+    }
+
+    .teaching-card h3 {
+      color: var(--text);
+      font-size: 0.93rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .teaching-card p {
+      font-size: 0.83rem;
+    }
+
+    .teaching-note {
+      margin-top: 2rem;
+      padding: 1.1rem 1.4rem;
+      background: var(--accent-light);
+      border-radius: var(--radius);
+      font-size: 0.88rem;
+      color: var(--accent-dark);
+    }
+
+    .teaching-note strong { font-weight: 600; }
+
+    /* ── News ─────────────────────────────────────────────────── */
+    .news-list { list-style: none; }
+
+    .news-item {
+      display: flex;
+      gap: 1.4rem;
+      padding: 1.3rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    .news-item:first-child { padding-top: 0; }
+    .news-item:last-child { border-bottom: none; }
+
+    .news-date {
+      flex-shrink: 0;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 0.15rem;
+      width: 70px;
+    }
+
+    .news-content h3 {
+      font-size: 0.93rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .news-content p { font-size: 0.85rem; }
+
+    /* ── Service ──────────────────────────────────────────────── */
+    .service-list { list-style: none; }
+
+    .service-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+
+    .service-item:last-child { border-bottom: none; }
+
+    .service-type {
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      width: 110px;
+      text-align: center;
+    }
+
+    .service-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .service-desc strong { color: var(--text); font-weight: 500; }
+
+    /* ── CV Section ───────────────────────────────────────────── */
+    #cv {
+      text-align: center;
+    }
+
+    #cv .section-title { text-align: center; }
+    #cv .section-title .divider { margin: 0.6rem auto 0; }
+
+    .cv-box {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2.5rem 3rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg);
+    }
+
+    .cv-icon {
+      font-size: 2.5rem;
+      opacity: 0.35;
+    }
+
+    .cv-box p {
+      font-size: 0.88rem;
+      max-width: 320px;
+    }
+
+    /* ── Contact ──────────────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .contact-block h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .contact-email {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .contact-affil {
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+    }
+
+    .social-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.4rem 0;
+      color: var(--text);
+      transition: color var(--transition);
+    }
+
+    .social-links a:hover { color: var(--accent); }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--accent-light);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.8rem;
+    }
+
+    footer strong { color: rgba(255,255,255,0.75); font-weight: 500; }
+    footer a { color: rgba(255,255,255,0.6); }
+    footer a:hover { color: #fff; }
+
+    /* ── Back to top ──────────────────────────────────────────── */
+    #back-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(91,127,166,0.35);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity var(--transition), transform var(--transition);
+      z-index: 900;
+    }
+
+    #back-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #back-top:hover { background: var(--accent-dark); }
+
+    /* ── Lightbox ─────────────────────────────────────────────── */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-overlay img {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 4px;
+      cursor: default;
+    }
+    .lightbox-caption {
+      color: white;
+      font-size: 14px;
+      font-style: italic;
+      margin-top: 12px;
+      text-align: center;
+      max-width: 80vw;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px; right: 28px;
+      color: white;
+      font-size: 36px;
+      cursor: pointer;
+      line-height: 1;
+      z-index: 10000;
+    }
+    .lightbox-prev,
+    .lightbox-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 48px;
+      cursor: pointer;
+      padding: 0 20px;
+      user-select: none;
+      z-index: 10000;
+    }
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
+    .project-photo {
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .project-photo:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────────── -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <span class="nav-brand">Dr. Diane Vassallo</span>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#service">Service</a></li>
+        <li><a href="#policy">Policy</a></li>
+        <li><a href="#cv">CV</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── About ──────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="photo-wrap">
+          <img src="images/profile.jpg" alt="Dr. Diane Vassallo" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
+        <div class="about-content">
+          <h1>Dr. Diane Vassallo</h1>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem; margin-bottom:0.1rem; font-weight:400;">B.Ed.(Hons)(Melit.) &middot; M.Sc.(Lancs.) &middot; Ph.D.(Belfast)</p>
+          <p class="title">Lecturer &amp; Researcher · Department of Technology and Entrepreneurship Education<br>Faculty of Education, University of Malta</p>
+          <p class="bio">
+            Dr. Diane Vassallo is a Lecturer in the Department of Technology and Entrepreneurship Education
+            at the Faculty of Education, University of Malta, where she teaches across undergraduate and
+            postgraduate programmes in computing education and early childhood education and care.
+          </p>
+          <p class="bio">
+            Her research sits at the intersection of Computational Thinking, Executive Functions, and
+            Artificial Intelligence in Education — exploring how digital tools and pedagogies can enhance
+            learning across formal and informal contexts, and how emerging technologies such as AI can be
+            integrated ethically and meaningfully into classrooms. She has a particular interest in learner
+            agency, teacher professional development, and the cognitive foundations of computing education.
+          </p>
+          <p class="bio">
+            Dr. Vassallo read for her B.Ed. (Hons.) at the University of Malta, completed an M.Sc. in
+            Learning Technologies at Lancaster University, and pursued her doctoral studies at Queen's
+            University Belfast, where her research focused on mainstream technologies for students with
+            learning difficulties. She is co-founder of <strong style="color:var(--text); font-weight:600;">Computational Thinking Malta</strong>
+            and co-organiser of the <strong style="color:var(--text); font-weight:600;">Bebras Challenge</strong> in Malta.
+          </p>
+          <div class="about-actions">
+            <a href="#cv" class="btn btn-primary">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 10v6m0 0-3-3m3 3 3-3M3 17v3h18v-3"/><rect x="3" y="3" width="18" height="10" rx="1"/></svg>
+              Download CV
+            </a>
+            <a href="#contact" class="btn btn-outline">Contact me</a>
+            <a href="#research" class="btn btn-outline">Research projects</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Recent Publications ─────────────────────────────────── -->
+  <section id="recent-publications">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Recent Work</span>
+        <h2>Recent Publications</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="rpub-grid">
+
+        <!-- 2026 paper -->
+        <a class="rpub-card" href="https://doi.org/10.1007/s10805-026-09726-3" target="_blank" rel="noopener noreferrer">
+          <span class="rpub-year">2026</span>
+          <p class="rpub-title">The AI guilt complex: navigating moral responsibility in AI-integrated pedagogy</p>
+          <p class="rpub-journal">Journal of Computing in Higher Education</p>
+        </a>
+
+        <!-- In Press paper -->
+        <a class="rpub-card" href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+          <span class="rpub-year">In Press</span>
+          <p class="rpub-title">From cognitive load to computational thinking: designing unplugged activities for early years</p>
+          <p class="rpub-journal">Education and Information Technologies</p>
+        </a>
+
+        <!-- 2025 Discover Education paper -->
+        <a class="rpub-card" href="https://doi.org/10.1007/s44217-025-00553-z" target="_blank" rel="noopener noreferrer">
+          <span class="rpub-year">2025</span>
+          <p class="rpub-title">Fostering computational thinking in early childhood education through unplugged board game play</p>
+          <p class="rpub-journal">Discover Education</p>
+        </a>
+
+      </div>
+      <p style="margin-top:1.6rem; font-size:0.88rem;">
+        <a href="#publications" style="color:var(--accent); font-weight:500;">View all publications →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Research Projects ───────────────────────────────────── -->
+  <section id="research">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Projects &amp; Initiatives</span>
+        <h2>Research Projects</h2>
+        <div class="divider"></div>
+      </div>
+
+      <!-- ─ Section 1: Erasmus+ ─────────────────────────────── -->
+      <div class="projects-subsection">
+        <div class="subsection-header">
+          <span class="eu-badge">Erasmus+</span>
+          <div>
+            <h3>Erasmus+ Funded Projects</h3>
+            <p>European Commission · Erasmus+ Programme · Co-funded projects</p>
+          </div>
+        </div>
+        <div class="cards-grid">
+
+          <!-- EmpowerAId -->
+          <div class="card">
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.8rem; flex-wrap:wrap;">
+              <span class="card-tag" style="margin-bottom:0;">Erasmus+</span>
+              <span class="eu-badge" style="font-size:0.6rem; padding:0.15rem 0.45rem;">🇪🇺 EU Funded</span>
+            </div>
+            <h3><a href="https://www.empoweraid-academy.eu/" target="_blank" rel="noopener noreferrer">EmpowerAId ↗</a></h3>
+            <p style="font-size:0.85rem; font-weight:600; color:var(--accent); margin-bottom:0.5rem;">Dr Diane Vassallo is the Principal Investigator for Malta on this project.</p>
+            <p>
+              Empowering Pre- and In-Service Teachers to Harness the Potential of AI for Designing
+              Creative and Ethical Digital Education Ecosystems. A European consortium project building
+              AI literacy, ethical awareness, and digital competence of educators through co-created,
+              inclusive training programmes.
+            </p>
+            <div class="pg">
+              <div class="pg-track">
+                <figure class="pg-item">
+                  <img src="images/IMG_4508.JPG" alt="EmpowerAId Transnational Partner Meeting, Malta" class="project-photo" data-caption="EmpowerAId Transnational Partner Meeting, Malta">
+                  <figcaption>EmpowerAId Transnational Partner Meeting, Malta</figcaption>
+                </figure>
+                <figure class="pg-item">
+                  <img src="images/IMG_4511.JPG" alt="EmpowerAId kick-off meeting, Vilnius, Lithuania" class="project-photo" data-caption="EmpowerAId kick-off meeting, Vilnius, Lithuania">
+                  <figcaption>EmpowerAId kick-off meeting, Vilnius, Lithuania</figcaption>
+                </figure>
+              </div>
+              <button class="pg-btn pg-prev" aria-label="Previous photo">&#8249;</button>
+              <button class="pg-btn pg-next" aria-label="Next photo">&#8250;</button>
+            </div>
+            <div class="card-meta">
+              <p style="margin-bottom:0.5rem;">
+                <strong>Period:</strong> April 2025 – May 2028 &nbsp;·&nbsp; <strong>Budget:</strong> €1,200,000
+              </p>
+              <p style="margin-bottom:0.8rem;">
+                <strong>Funding:</strong> European Commission · Erasmus+
+              </p>
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <span class="status-badge status-active">Active</span>
+                <a href="https://www.empoweraid-academy.eu/" class="btn btn-outline" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; padding:0.3rem 0.75rem;">Visit website ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- ALPER-EU -->
+          <div class="card">
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.8rem; flex-wrap:wrap;">
+              <span class="card-tag" style="margin-bottom:0;">Erasmus+ · KA220-SCH</span>
+              <span class="eu-badge" style="font-size:0.6rem; padding:0.15rem 0.45rem;">🇪🇺 EU Funded</span>
+            </div>
+            <h3><a href="https://alper-eu.org" target="_blank" rel="noopener noreferrer">ALPER-EU ↗</a></h3>
+            <p>
+              K12 Agile Learning of Programming with Educational Robotics. A European cooperation
+              project bringing together policy makers, universities, and primary schools across five
+              EU countries to strengthen early programming and robotics education through an agile,
+              scrum-style learning approach. Develops a standardised, competence-based curriculum
+              built around 60 gamified robotics "sprints", an engagement assessment tool, and an
+              asynchronous teacher-training platform. Piloted in real classrooms including learners
+              with ADHD, with EU-wide dissemination via the SCIENTIX network across 51 countries.
+            </p>
+            <div class="pg">
+              <div class="pg-track">
+                <figure class="pg-item">
+                  <img src="images/IMG_4504.JPG" alt="ALPER-EU kick-off meeting, Malta" class="project-photo" data-caption="ALPER-EU kick-off meeting, Malta">
+                  <figcaption>ALPER-EU kick-off meeting, Malta</figcaption>
+                </figure>
+                <figure class="pg-item">
+                  <img src="images/IMG_4505.JPG" alt="Dr Vassallo presenting at the ALPER-EU kick-off" class="project-photo" data-caption="Dr Vassallo presenting at the ALPER-EU kick-off">
+                  <figcaption>Dr Vassallo presenting at the ALPER-EU kick-off</figcaption>
+                </figure>
+              </div>
+              <button class="pg-btn pg-prev" aria-label="Previous photo">&#8249;</button>
+              <button class="pg-btn pg-next" aria-label="Next photo">&#8250;</button>
+            </div>
+            <div class="card-meta">
+              <p style="margin-bottom:0.5rem;">
+                <strong>Period:</strong> December 2025 – November 2027 &nbsp;·&nbsp; <strong>Budget:</strong> €400,000
+              </p>
+              <p style="margin-bottom:0.5rem;">
+                <strong>Ref:</strong> KA220-SCH-B5FEF9B5 &nbsp;·&nbsp; <strong>Funding:</strong> European Commission · Erasmus+
+              </p>
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-top:0.8rem;">
+                <span class="status-badge status-active">Active</span>
+                <span class="btn-soon">Website coming soon</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- GreenToC -->
+          <div class="card">
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.8rem; flex-wrap:wrap;">
+              <span class="card-tag" style="margin-bottom:0;">Erasmus+</span>
+              <span class="eu-badge" style="font-size:0.6rem; padding:0.15rem 0.45rem;">🇪🇺 EU Funded</span>
+            </div>
+            <h3><a href="https://greentoc.eu" target="_blank" rel="noopener noreferrer">GreenToC ↗</a></h3>
+            <p>
+              Synergies Between Higher Education Institutions and the Labour Market for Developing
+              Sustainability Capabilities for Green Transformation Strategies Using the Theory of Change.
+              Bridges higher education and the labour market to co-create sustainability capabilities
+              in university curricula.
+            </p>
+            <div class="pg">
+              <div class="pg-track">
+                <figure class="pg-item">
+                  <img src="images/IMG_4510.JPG" alt="GreenToC Transnational Partner Meeting, Cyprus" class="project-photo" data-caption="GreenToC Transnational Partner Meeting, Cyprus">
+                  <figcaption>GreenToC Transnational Partner Meeting, Cyprus</figcaption>
+                </figure>
+                <figure class="pg-item">
+                  <img src="images/IMG_4515.JPG" alt="GreenToC Transnational Partner Meeting, Timișoara, Romania" class="project-photo" data-caption="GreenToC Transnational Partner Meeting, Timișoara, Romania">
+                  <figcaption>GreenToC Transnational Partner Meeting, Timișoara, Romania</figcaption>
+                </figure>
+              </div>
+              <button class="pg-btn pg-prev" aria-label="Previous photo">&#8249;</button>
+              <button class="pg-btn pg-next" aria-label="Next photo">&#8250;</button>
+            </div>
+            <div class="card-meta">
+              <p style="margin-bottom:0.5rem;">
+                <strong>Period:</strong> December 2024 – May 2027 &nbsp;·&nbsp; <strong>Budget:</strong> €400,000
+              </p>
+              <p style="margin-bottom:0.8rem;">
+                <strong>Funding:</strong> European Commission · Erasmus+
+              </p>
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <span class="status-badge status-active">Active</span>
+                <a href="https://greentoc.eu" class="btn btn-outline" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; padding:0.3rem 0.75rem;">Visit website ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- CThink.IT -->
+          <div class="card">
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.8rem; flex-wrap:wrap;">
+              <span class="card-tag" style="margin-bottom:0;">Erasmus+</span>
+              <span class="eu-badge" style="font-size:0.6rem; padding:0.15rem 0.45rem;">🇪🇺 EU Funded</span>
+            </div>
+            <h3><a href="https://www.cthinkit.eu/" target="_blank" rel="noopener noreferrer">CThink.IT ↗</a></h3>
+            <p>
+              Think, Learn and Play in a Computational Thinking Way. Led by the University of Malta
+              in a consortium of 6 European partners, the project developed an unplugged board game
+              to teach computational thinking skills to young children in early years education.
+            </p>
+            <div class="pg">
+              <div class="pg-track">
+                <figure class="pg-item">
+                  <img src="images/IMG_4514.JPG" alt="CThink.IT Transnational Partner Meeting, Thessaloniki, Greece" class="project-photo" data-caption="CThink.IT Transnational Partner Meeting, Thessaloniki, Greece">
+                  <figcaption>CThink.IT Transnational Partner Meeting, Thessaloniki, Greece</figcaption>
+                </figure>
+                <figure class="pg-item">
+                  <img src="images/IMG_4519.JPG" alt="CThink.IT consortium meeting, Thessaloniki" class="project-photo" data-caption="CThink.IT consortium meeting, Thessaloniki">
+                  <figcaption>CThink.IT consortium meeting, Thessaloniki</figcaption>
+                </figure>
+              </div>
+              <button class="pg-btn pg-prev" aria-label="Previous photo">&#8249;</button>
+              <button class="pg-btn pg-next" aria-label="Next photo">&#8250;</button>
+            </div>
+            <div class="card-meta">
+              <p style="margin-bottom:0.5rem;">
+                <strong>Period:</strong> December 2022 – May 2025 &nbsp;·&nbsp; <strong>Budget:</strong> €250,000
+              </p>
+              <p style="margin-bottom:0.8rem;">
+                <strong>Funding:</strong> European Commission · Erasmus+
+              </p>
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <span class="status-badge status-completed">Completed</span>
+                <a href="https://www.cthinkit.eu/" class="btn btn-outline" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; padding:0.3rem 0.75rem;">Visit website ↗</a>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /cards-grid -->
+      </div><!-- /projects-subsection -->
+
+      <!-- ─ Section 2: Other Projects ───────────────────────── -->
+      <div class="projects-subsection">
+        <div class="subsection-header">
+          <div>
+            <h3>Other Projects &amp; Initiatives</h3>
+            <p>University alliances, national programmes, and independent research initiatives</p>
+          </div>
+        </div>
+        <div class="cards-grid">
+
+          <!-- SEA-EU Task 2.2 -->
+          <div class="card">
+            <span class="card-tag">European University Alliance</span>
+            <h3><a href="https://sea-eu.org" target="_blank" rel="noopener noreferrer">SEA-EU · Task 2.2 ↗</a></h3>
+            <p>
+              Contributing to the SEA-EU Task 2.2 initiative by supporting the design and delivery
+              of interdisciplinary learning that connects digital innovation with green transformation.
+              Work focuses on practical resources, staff development, and evidence-informed approaches
+              that strengthen teaching and learning across partner institutions.
+            </p>
+            <div class="pg">
+              <div class="pg-track">
+                <figure class="pg-item">
+                  <img src="images/IMG_4506.JPG" alt="Dr Vassallo presenting at the SEA-EU seminar, Nord Universitet, Norway, December 2025" class="project-photo" data-caption="Dr Vassallo presenting at the SEA-EU seminar, Nord Universitet, Norway, December 2025">
+                  <figcaption>Dr Vassallo presenting at the SEA-EU seminar, Nord Universitet, Norway, December 2025</figcaption>
+                </figure>
+                <figure class="pg-item">
+                  <img src="images/IMG_4507.JPG" alt="SEA-EU visit, Nord Universitet, Bodø, Norway, December 2025" class="project-photo" data-caption="SEA-EU visit, Nord Universitet, Bodø, Norway, December 2025">
+                  <figcaption>SEA-EU visit, Nord Universitet, Bodø, Norway, December 2025</figcaption>
+                </figure>
+                <figure class="pg-item">
+                  <img src="images/IMG_4518.JPG" alt="SEA-EU consortium meeting, Gdańsk, Poland, June 2024" class="project-photo" data-caption="SEA-EU consortium meeting, Gdańsk, Poland, June 2024">
+                  <figcaption>SEA-EU consortium meeting, Gdańsk, Poland, June 2024</figcaption>
+                </figure>
+              </div>
+              <button class="pg-btn pg-prev" aria-label="Previous photo">&#8249;</button>
+              <button class="pg-btn pg-next" aria-label="Next photo">&#8250;</button>
+            </div>
+            <div class="card-meta">
+              <p style="margin-bottom:0.8rem;">
+                <strong>Period:</strong> December 2024 – present
+              </p>
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <span class="status-badge status-active">Active</span>
+                <a href="https://sea-eu.org" class="btn btn-outline" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; padding:0.3rem 0.75rem;">Visit website ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- CT Malta / Bebras -->
+          <div class="card">
+            <span class="card-tag">National Initiative</span>
+            <h3><a href="https://computationalthinking.mt" target="_blank" rel="noopener noreferrer">Computational Thinking Malta &amp; Bebras Malta ↗</a></h3>
+            <p>
+              Co-founder of Computational Thinking Malta and co-organiser of the national Bebras
+              Challenge in Malta, promoting computational thinking across schools and supporting
+              teachers in embedding CT into their everyday classroom practice.
+            </p>
+            <div class="pg">
+              <div class="pg-track">
+                <figure class="pg-item">
+                  <img src="images/IMG_4512.JPG" alt="Co-founders of Computational Thinking Malta and Bebras Malta at the inaugural Bebras Challenge ceremony" class="project-photo" data-caption="Co-founders of Computational Thinking Malta and Bebras Malta at the inaugural Bebras Challenge ceremony">
+                  <figcaption>Co-founders of Computational Thinking Malta and Bebras Malta at the inaugural Bebras Challenge ceremony</figcaption>
+                </figure>
+                <figure class="pg-item">
+                  <img src="images/IMG_4513.JPG" alt="Dr Vassallo delivering the address at the inaugural Bebras Challenge awards ceremony" class="project-photo" data-caption="Dr Vassallo delivering the address at the inaugural Bebras Challenge awards ceremony">
+                  <figcaption>Dr Vassallo delivering the address at the inaugural Bebras Challenge awards ceremony</figcaption>
+                </figure>
+                <figure class="pg-item">
+                  <img src="images/IMG_4517.JPG" alt="Bebras annual international meeting, Serbia, May 2024" class="project-photo" data-caption="Bebras annual international meeting, Serbia, May 2024">
+                  <figcaption>Bebras annual international meeting, Serbia, May 2024</figcaption>
+                </figure>
+              </div>
+              <button class="pg-btn pg-prev" aria-label="Previous photo">&#8249;</button>
+              <button class="pg-btn pg-next" aria-label="Next photo">&#8250;</button>
+            </div>
+            <div class="card-meta">
+              <p style="margin-bottom:0.5rem;">
+                <strong>Role:</strong> Co-founder &amp; Co-organiser
+              </p>
+              <p style="margin-bottom:0.8rem;">
+                <strong>Scope:</strong> National · Schools &amp; Teacher CPD
+              </p>
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <span class="status-badge status-active">Ongoing</span>
+                <a href="https://computationalthinking.mt" class="btn btn-outline" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; padding:0.3rem 0.75rem;">CT Malta ↗</a>
+                <a href="https://bebras.computationalthinking.mt/" class="btn btn-outline" target="_blank" rel="noopener noreferrer" style="font-size:0.78rem; padding:0.3rem 0.75rem;">Bebras Malta ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- GBL4ESL — School Invaders -->
+          <div class="card">
+            <span class="card-tag">Consultancy &amp; Research</span>
+            <h3>GBL4ESL — School Invaders</h3>
+            <p>
+              Dr Vassallo served as Educational and Pedagogical Consultant on <em>School Invaders</em>,
+              a game-based learning project commissioned by MITA (Malta Information Technology Agency).
+              She applied Bloom's Taxonomy to model the pedagogical content for O Level Computing,
+              provided feedback on gameplay and user interaction, and contributed to the Erasmus+
+              GBL4ESL project toolkit development.
+            </p>
+            <div class="card-meta">
+              <p style="margin-bottom:0.5rem;">
+                <strong>Period:</strong> 2017 – 2018
+              </p>
+              <span class="status-badge status-completed">Completed</span>
+            </div>
+          </div>
+
+        </div><!-- /cards-grid -->
+      </div><!-- /projects-subsection -->
+
+    </div>
+  </section>
+
+  <!-- ── Publications ────────────────────────────────────────── -->
+  <section id="publications">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Scholarly output</span>
+        <h2>Publications</h2>
+        <div class="divider"></div>
+      </div>
+
+      <!-- Top buttons -->
+      <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-bottom:2rem;">
+        <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          View all publications on Google Scholar ↗
+        </a>
+        <a href="https://www.um.edu.mt/library/oar/browse?type=pauthor&sort_by=2&order=DESC&rpp=1000&etal=0&value=Vassallo,%20Diane" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+          View full list on OAR@UM ↗
+        </a>
+      </div>
+
+      <!-- 2026 -->
+      <div class="pub-year-group">
+        <p class="pub-year">2026</p>
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://doi.org/10.1007/s10805-026-09726-3" target="_blank" rel="noopener noreferrer">
+                The AI guilt complex: Moral emotions and ethical dilemmas in academic technology adoption<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Vassallo, D.</p>
+            <p class="pub-venue"><em>Journal of Academic Ethics</em>. Advance online publication</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- In Press -->
+      <div class="pub-year-group">
+        <p class="pub-year" style="color:var(--text-muted);">In Press</p>
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                Cognitive abilities and computational thinking in intellectually high-ability adolescents: A mixed-methods study<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Vassallo, D., &amp; Frendo, C. S.</p>
+            <p class="pub-venue"><em>Australasian Journal of Gifted Education</em> (in press)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2025 -->
+      <div class="pub-year-group">
+        <p class="pub-year">2025</p>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://doi.org/10.1007/s44217-025-00553-z" target="_blank" rel="noopener noreferrer">
+                Fostering computational thinking in early learners: An iterative approach in a Maltese primary school<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Vassallo, D.</p>
+            <p class="pub-venue"><em>Discover Education</em>, 4(1), 1–19</p>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://doi.org/10.62695/RRUI1028" target="_blank" rel="noopener noreferrer">
+                Educational neuroscience meets AI: A framework for secondary science teaching<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Frendo, C. S., &amp; Vassallo, D.</p>
+            <p class="pub-venue"><em>Malta Journal of Education</em>, 6(1), 5–21</p>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://www.mreronline.org/wp-content/uploads/2025/06/MRER-19-1-Article-2-Final-Leonard-Busuttil-and-Diane-Vassallo.pdf" target="_blank" rel="noopener noreferrer">
+                Between ambition and implementation: A comparative study of Malta's ICT C3 curriculum in the context of small-state digital education<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Vassallo, D., Govus, G., &amp; Busuttil, L.</p>
+            <p class="pub-venue"><em>Malta Review of Educational Research</em>, 19(1)</p>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://doi.org/10.4018/979-8-3693-4542-9.ch002" target="_blank" rel="noopener noreferrer">
+                Computational thinking: Exploring approaches in early childhood education<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Busuttil, L., Vassallo, D., &amp; Schembri, P.</p>
+            <p class="pub-venue">In <em>Effective Computer Science Education in K-12 Classrooms</em> (pp. 27–54)</p>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                Evaluating the ICT C3 curriculum in Maltese schools: Teacher perspectives<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Busuttil, L., &amp; Vassallo, D.</p>
+            <p class="pub-venue">University of Malta, Faculty of Education</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 2023 -->
+      <div class="pub-year-group">
+        <p class="pub-year">2023</p>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                Cultivating computational thinking in early years through board games: The Cthink.it approach<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Bratitsis, T., Tsapara, M., Melliou, K., Busuttil, L., Vassallo, D., et al.</p>
+            <p class="pub-venue">In <em>Interactive Mobile Communication, Technologies and Learning</em> (pp. 78–89)</p>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                Promoting computational thinking in early childhood: A novel board game design<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Busuttil, L., Vassallo, D., et al.</p>
+            <p class="pub-venue"><em>ICERI2023 Proceedings</em>, 4868–4876</p>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                Embarking on computational thinking<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Vassallo, D.</p>
+            <p class="pub-venue"><em>ICERI2023 Proceedings</em>, 5083–5088</p>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                Integrating computational thinking into classroom practice: A case study<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Vassallo, D., &amp; Busuttil, L.</p>
+            <p class="pub-venue">In <em>To Be or Not to Be a Great Educator</em> (p. 600)</p>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <div>
+            <p class="pub-title">
+              <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                Cthink.it: A board-game for computational thinking in early years<span class="pub-ext">↗</span>
+              </a>
+            </p>
+            <p class="pub-authors">Bratitsis, T., Busuttil, L., Vassallo, D., et al.</p>
+            <p class="pub-venue">Academic Conferences International Limited</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom buttons -->
+      <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:0.5rem;">
+        <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          View all publications on Google Scholar ↗
+        </a>
+        <a href="https://www.um.edu.mt/library/oar/browse?type=pauthor&sort_by=2&order=DESC&rpp=1000&etal=0&value=Vassallo,%20Diane" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+          View full list on OAR@UM ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Teaching ────────────────────────────────────────────── -->
+  <section id="teaching">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Academic Teaching</span>
+        <h2>Teaching</h2>
+        <div class="divider"></div>
+      </div>
+
+      <p style="font-size:0.93rem; color:var(--text-muted); margin-bottom:2rem; max-width:680px;">
+        I teach across undergraduate and postgraduate programmes at the Faculty of Education, University of Malta.
+        My teaching bridges theory and practice in computing education, digital pedagogies, and early childhood
+        education and care.
+      </p>
+
+      <div class="teaching-grid">
+
+        <div class="teaching-card">
+          <h3><a href="https://www.um.edu.mt/courses/studyunit/TEM5016" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">TEM5016</span>&nbsp; Introduction to Computational Thinking</a></h3>
+          <p>Foundations of computational thinking — decomposition, pattern recognition, abstraction, and algorithms — explored through practical and unplugged activities.</p>
+        </div>
+
+        <div class="teaching-card">
+          <h3><a href="https://www.um.edu.mt/courses/studyunit/TEM5007" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">TEM5007</span>&nbsp; Resources for Teaching Computing</a></h3>
+          <p>Design, evaluation, and use of tools and resources for effective computing education, including physical computing, game-based learning, and digital creation.</p>
+        </div>
+
+        <div class="teaching-card">
+          <h3><a href="https://www.um.edu.mt/courses/studyunit/TEM5013" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">TEM5013</span>&nbsp; Practice of Computing Education — Part 1</a></h3>
+          <p>An introduction to the theory and practice of teaching computing at secondary level, grounded in current pedagogical research and curriculum frameworks.</p>
+        </div>
+
+        <div class="teaching-card">
+          <h3><a href="https://www.um.edu.mt/courses/studyunit/TEM5015" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">TEM5015</span>&nbsp; Practice of Computing Education — Part 2</a></h3>
+          <p>A continuation developing deeper competence in computing pedagogy, lesson design, and reflective professional practice in school contexts.</p>
+        </div>
+
+        <div class="teaching-card">
+          <h3><a href="https://www.um.edu.mt/courses/studyunit/TEM5014" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">TEM5014</span>&nbsp; Assessment in Computing Education</a></h3>
+          <p>Principles and practices of formative and summative assessment within computing education, including design of assessment tools aligned to curriculum outcomes.</p>
+        </div>
+
+        <div class="teaching-card">
+          <h3><a href="https://www.um.edu.mt/courses/studyunit/TEM5018" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">TEM5018</span>&nbsp; Robots, Programmable Toys &amp; Physical Computing</a></h3>
+          <p>Hands-on exploration of robotics, programmable toys, and physical computing in educational settings, with a focus on early years and primary contexts.</p>
+        </div>
+
+        <div class="teaching-card">
+          <h3><a href="https://www.um.edu.mt/courses/studyunit/LLI5025" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">LLI5025</span>&nbsp; Digital Pedagogies: A Hands-On Approach</a></h3>
+          <p>Practical engagement with digital tools and pedagogies for diverse learning contexts, linking theory to classroom application across age groups.</p>
+        </div>
+
+        <div class="teaching-card">
+          <h3><a href="https://www.um.edu.mt/courses/studyunit/ICT5101" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">ICT5101</span>&nbsp; Internet of Things</a></h3>
+          <p>Conceptual and practical introduction to the Internet of Things — connected devices, data, and the implications of networked systems for society and education.</p>
+        </div>
+
+        <div class="teaching-card">
+          <h3>
+            <a href="https://www.um.edu.mt/courses/studyunit/LLI5001" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">LLI5001</span></a>
+            /
+            <a href="https://www.um.edu.mt/courses/studyunit/LLI5002" target="_blank" rel="noopener noreferrer" class="course-link"><span class="course-code">LLI5002</span></a>
+            &nbsp;Field Placement 1 &amp; 2
+          </h3>
+          <p>Supervised school-based placements providing student teachers with structured, mentored experience in real classroom environments.</p>
+        </div>
+
+      </div>
+
+      <div class="teaching-note">
+        <strong>Teaching Practice Examiner —</strong> I serve as an examiner for teaching practice placements
+        within the Faculty of Education, supervising and assessing student teachers on school placement and
+        supporting their professional formation across computing and related subject areas.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── News ───────────────────────────────────────────────── -->
+  <section id="news">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Latest</span>
+        <h2>News &amp; Updates</h2>
+        <div class="divider"></div>
+      </div>
+
+      <ul class="news-list">
+        <li class="news-item">
+          <span class="news-date">Apr 2025</span>
+          <div class="news-content">
+            <h3>EmpowerAId Project Launched</h3>
+            <p>The EmpowerAId Erasmus+ project officially launched in April 2025. The consortium will work through to May 2028 to develop AI literacy and ethical digital competence for pre- and in-service teachers across Europe.</p>
+          </div>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025</span>
+          <div class="news-content">
+            <h3>New Publication in <em>Discover Education</em></h3>
+            <p>Paper published: "Fostering computational thinking in early learners: An iterative approach in a Maltese primary school." Available in <em>Discover Education</em>, 4(1).</p>
+          </div>
+        </li>
+        <li class="news-item">
+          <span class="news-date">May 2025</span>
+          <div class="news-content">
+            <h3>CThink.IT Project Successfully Concluded</h3>
+            <p>The Erasmus+ CThink.IT project concluded in May 2025 after developing and piloting an unplugged board game for teaching computational thinking in early years settings across 6 European countries.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Service ────────────────────────────────────────────── -->
+  <section id="service">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Academic &amp; Professional</span>
+        <h2>Invited Roles &amp; Service</h2>
+        <div class="divider"></div>
+      </div>
+
+      <ul class="service-list">
+
+        <li class="service-item">
+          <span class="service-type">Peer Review</span>
+          <span class="service-desc">
+            <strong>Ad-hoc manuscript reviewer</strong> for
+            <em>Informatics in Education</em>,
+            <em>Journal of Information Technology Education: Research</em>,
+            <em>Universal Access in the Information Society</em>, and other journals in computing and technology education.
+          </span>
+        </li>
+
+        <li class="service-item">
+          <span class="service-type">EU Project</span>
+          <span class="service-desc">
+            <strong>Partner Contributor</strong> — EmpowerAId (Erasmus+, 2025–2028).
+            University of Malta representative; contributing to teacher professional development resources and AI literacy materials.
+          </span>
+        </li>
+
+        <li class="service-item">
+          <span class="service-type">EU Project</span>
+          <span class="service-desc">
+            <strong>Partner Contributor</strong> — GreenToC (Erasmus+, 2024–2027).
+            Involved in curriculum development bridging higher education and the green economy labour market.
+          </span>
+        </li>
+
+        <li class="service-item">
+          <span class="service-type">EU Project</span>
+          <span class="service-desc">
+            <strong>Partner Contributor</strong> — CThink.IT (Erasmus+, 2022–2025).
+            Contributed to the design, development, and piloting of a computational thinking board game for early years education.
+          </span>
+        </li>
+
+        <li class="service-item">
+          <span class="service-type">EU Project</span>
+          <span class="service-desc">
+            <strong>Partner Contributor</strong> — SEA-EU (European University Alliance).
+            Active participation in alliance-level teaching and research activities.
+          </span>
+        </li>
+
+        <li class="service-item">
+          <span class="service-type">Community</span>
+          <span class="service-desc">
+            <strong>Co-founder</strong> — Computational Thinking Malta.
+            Established a national community of practice for educators embedding computational thinking across Maltese schools.
+          </span>
+        </li>
+
+        <li class="service-item">
+          <span class="service-type">Community</span>
+          <span class="service-desc">
+            <strong>Co-organiser</strong> — Bebras Challenge Malta.
+            Annual national competition promoting informatics and computational thinking among school-age students.
+          </span>
+        </li>
+
+        <li class="service-item">
+          <span class="service-type">Institutional</span>
+          <span class="service-desc">
+            <strong>Teaching Practice Examiner</strong> — Faculty of Education, University of Malta.
+            Supervision and formal assessment of student teachers on school placement within computing and related programmes.
+          </span>
+        </li>
+
+        <li class="service-item">
+          <span class="service-type">Outreach</span>
+          <span class="service-desc">
+            <strong>Entrepreneurship Course Coordinator &amp; Tutor</strong> — National Council of Women (Malta), Sep 2025 – Jan 2026.
+            Co-ordinated and taught an entrepreneurship course for the National Council of Women, supporting women's
+            professional development and digital literacy in Malta.
+          </span>
+        </li>
+
+        <li class="service-item">
+          <span class="service-type">Outreach</span>
+          <span class="service-desc">
+            <strong>Voluntary International Teaching</strong> — Feb 2026 – present.
+            Delivering online teaching in Computer Science and Computing Pedagogy to in-service teachers in Pakistan,
+            supporting computing education capacity in under-resourced contexts.
+          </span>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Policy Engagement ─────────────────────────────────── -->
+  <section id="policy">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Public Impact &amp; National Policy</span>
+        <h2>Policy Engagement &amp; Public Contribution</h2>
+        <div class="divider" style="background:var(--policy);"></div>
+      </div>
+      <p style="font-size:0.93rem; color:var(--text-muted); margin-bottom:2.5rem; max-width:640px;">
+        Contributions to national and international policy, public consultation panels,
+        and expert engagement on digital education and AI — translating research into
+        real-world impact beyond the academy.
+      </p>
+
+      <!-- Entry 1: AI in Education Panel -->
+      <div class="policy-entry">
+        <div>
+          <p class="policy-org">Public Panel Discussion · Malta</p>
+          <p class="policy-title">AI in Education — Public Panel Discussion</p>
+          <p class="policy-desc">
+            Invited panelist at a public event on AI in Education in Malta, contributing
+            expertise on computational thinking, AI literacy, and ethical technology
+            integration in schools. Engaged with educators, policymakers, and members of
+            the public on the opportunities and challenges of AI-enabled learning environments.
+          </p>
+        </div>
+        <figure class="policy-photo">
+          <img src="images/IMG_4509.JPG" alt="Invited panelist at AI in Education public event, Malta" class="project-photo" data-caption="Invited panelist at AI in Education public event, Malta">
+          <figcaption>Invited panelist at AI in Education public event, Malta</figcaption>
+        </figure>
+      </div>
+
+      <!-- Entry 2: DES 2030 Consultation & Working Group (merged) -->
+      <div class="policy-entry">
+        <div>
+          <p class="policy-org">Directorate for Digital Literacy and Transversal Skills (DDLTS) · Government of Malta</p>
+          <p class="policy-title">Digital Education Strategy 2030 — Consultation &amp; Working Group Contributor</p>
+          <p class="policy-desc">
+            Invited contributor to Malta's Digital Education Strategy 2030, participating in both
+            the public consultation panel and the policy working group convened by the DDLTS.
+            Contributed expert perspectives on digital literacy, computational thinking, and ICT
+            curriculum policy to inform the national strategy framework.
+          </p>
+        </div>
+        <figure class="policy-photo">
+          <img src="images/IMG_4516.JPG" alt="Contributing to the Digital Education Strategy 2030 working group discussion" class="project-photo" data-caption="Contributing to the Digital Education Strategy 2030 working group discussion">
+          <figcaption>Contributing to the Digital Education Strategy 2030 working group discussion</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CV ─────────────────────────────────────────────────── -->
+  <section id="cv">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Curriculum Vitae</span>
+        <h2>CV</h2>
+        <div class="divider"></div>
+      </div>
+      <div style="display:flex; justify-content:center;">
+        <div class="cv-box">
+          <span class="cv-icon">📄</span>
+          <p>Download my full academic CV as a PDF. Last updated [Month Year].</p>
+          <!-- Replace href with the path to your actual CV PDF once uploaded -->
+          <a href="assets/cv-diane-vassallo.pdf" class="btn btn-primary" download>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 10v6m0 0-3-3m3 3 3-3M3 17v3h18v-3"/><rect x="3" y="3" width="18" height="10" rx="1"/></svg>
+            Download CV (PDF)
+          </a>
+          <p style="font-size:0.78rem; color:var(--text-muted);">
+            Also on
+            <a href="https://orcid.org/0000-0002-9062-2297" target="_blank" rel="noopener noreferrer">ORCID</a>,
+            <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>, or
+            <a href="https://www.um.edu.mt/profile/dianevassallo" target="_blank" rel="noopener noreferrer">University of Malta profile</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-label">Get in touch</span>
+        <h2>Contact</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h3>Institutional Contact</h3>
+          <a href="mailto:diane.vassallo@um.edu.mt" class="contact-email">diane.vassallo@um.edu.mt</a>
+          <p class="contact-affil" style="margin-top:0.6rem;">
+            <strong style="color:var(--text); font-weight:500;">Tel:</strong> +356 2340 2499<br>
+            <strong style="color:var(--text); font-weight:500;">Office:</strong> Room 322, Old Humanities Building
+          </p>
+          <p class="contact-affil">
+            Department of Technology and Entrepreneurship Education<br>
+            Faculty of Education<br>
+            University of Malta, Msida MSD 2080, Malta
+          </p>
+          <p style="margin-top:0.8rem;">
+            <a href="https://www.um.edu.mt/profile/dianevassallo" target="_blank" rel="noopener noreferrer"
+               style="font-size:0.85rem; font-weight:500; color:var(--accent);">
+              View University of Malta profile ↗
+            </a>
+          </p>
+        </div>
+
+        <div class="contact-block">
+          <h3>Academic Profiles</h3>
+          <ul class="social-links">
+            <li>
+              <a href="https://orcid.org/0000-0002-9062-2297" target="_blank" rel="noopener noreferrer">
+                <span class="social-icon">ID</span>
+                ORCID &nbsp;<span style="font-size:0.75rem; font-weight:400; color:var(--text-muted);">0000-0002-9062-2297</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://scholar.google.com/citations?user=STmH3VsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                <span class="social-icon">GS</span>
+                Google Scholar
+              </a>
+            </li>
+            <li>
+              <a href="https://www.researchgate.net/profile/Diane-Vassallo" target="_blank" rel="noopener noreferrer">
+                <span class="social-icon">RG</span>
+                ResearchGate
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/diane-vassallo-73bb394b" target="_blank" rel="noopener noreferrer">
+                <span class="social-icon">in</span>
+                LinkedIn
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer>
+    <p>
+      &copy; <span id="year"></span> <strong>Dr. Diane Vassallo</strong> ·
+      Faculty of Education, <a href="https://www.um.edu.mt" target="_blank" rel="noopener noreferrer">University of Malta</a>
+    </p>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="back-top" aria-label="Back to top">↑</button>
+
+  <!-- ── Scripts ────────────────────────────────────────────── -->
+  <script>
+    // Current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Nav: scroll shadow + active link highlighting
+    const nav = document.getElementById('main-nav');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const backTop  = document.getElementById('back-top');
+
+    function onScroll() {
+      const y = window.scrollY;
+
+      // Shadow on scroll
+      nav.classList.toggle('scrolled', y > 10);
+
+      // Back-to-top visibility
+      backTop.classList.toggle('visible', y > 400);
+
+      // Active nav link
+      let current = '';
+      sections.forEach(sec => {
+        if (y >= sec.offsetTop - 90) current = sec.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open);
+    });
+
+    // Close mobile nav on link click
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        links.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', false);
+      });
+    });
+
+    // Back to top
+    backTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Horizontal scroll gallery arrows
+    document.querySelectorAll('.pg').forEach(gallery => {
+      const track = gallery.querySelector('.pg-track');
+      const prev  = gallery.querySelector('.pg-prev');
+      const next  = gallery.querySelector('.pg-next');
+      if (!track || !prev || !next) return;
+
+      function updateBtns() {
+        const atStart = track.scrollLeft <= 2;
+        const atEnd   = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+        prev.style.opacity = atStart ? '0.3' : '1';
+        prev.style.pointerEvents = atStart ? 'none' : 'auto';
+        next.style.opacity = atEnd ? '0.3' : '1';
+        next.style.pointerEvents = atEnd ? 'auto' : 'auto';
+        next.style.display = (gallery.classList.contains('pg-single')) ? 'none' : '';
+        prev.style.display = (gallery.classList.contains('pg-single')) ? 'none' : '';
+      }
+
+      prev.addEventListener('click', () => track.scrollBy({ left: -track.clientWidth * 0.5, behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left:  track.clientWidth * 0.5, behavior: 'smooth' }));
+      track.addEventListener('scroll', updateBtns, { passive: true });
+      updateBtns();
+    });
+
+  </script>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox-overlay" id="lightbox">
+    <span class="lightbox-close" id="lightbox-close">&#x2715;</span>
+    <span class="lightbox-prev" id="lightbox-prev">&#8249;</span>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+    <span class="lightbox-next" id="lightbox-next">&#8250;</span>
+  </div>
+
+  <script>
+  (function() {
+    var overlay   = document.getElementById('lightbox');
+    var img       = document.getElementById('lightbox-img');
+    var caption   = document.getElementById('lightbox-caption');
+    var closeBtn  = document.getElementById('lightbox-close');
+    var prevBtn   = document.getElementById('lightbox-prev');
+    var nextBtn   = document.getElementById('lightbox-next');
+
+    var currentIndex = 0;
+    var currentGroup = [];
+
+    function openLightbox(photos, index) {
+      currentGroup = photos;
+      currentIndex = index;
+      showImage(currentIndex);
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      prevBtn.style.display = currentGroup.length > 1 ? 'block' : 'none';
+      nextBtn.style.display = currentGroup.length > 1 ? 'block' : 'none';
+    }
+
+    function showImage(index) {
+      img.src = currentGroup[index].src;
+      img.alt = currentGroup[index].alt || '';
+      caption.textContent = currentGroup[index].caption || '';
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Attach click to all project photos
+    document.querySelectorAll('.project-photo').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var card = el.closest('.card, section');
+        var groupPhotos = card
+          ? Array.from(card.querySelectorAll('.project-photo'))
+          : [el];
+        var photos = groupPhotos.map(function(p) {
+          return {
+            src: p.src,
+            alt: p.alt,
+            caption: p.dataset.caption || p.alt || ''
+          };
+        });
+        var index = groupPhotos.indexOf(el);
+        openLightbox(photos, index >= 0 ? index : 0);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', closeLightbox);
+    img.addEventListener('click', function(e) { e.stopPropagation(); });
+
+    prevBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + currentGroup.length) % currentGroup.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % currentGroup.length;
+      showImage(currentIndex);
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (!overlay.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + currentGroup.length) % currentGroup.length;
+        showImage(currentIndex);
+      }
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % currentGroup.length;
+        showImage(currentIndex);
+      }
+    });
+  })();
+  </script>
+
+</body>
+</html>
